@@ -159,20 +159,21 @@ class Trainer():
     def save_examples(self,epoch):
         print("saving")
         for j,(input_images,target_images) in enumerate(self.val_dataloader):
-            x = input_images[3].to("cuda:0")
+            x = input_images.to("cuda:0")
             fake_images = self.G(x)[3]
             self.G.zero_grad()
             for i in range(len(fake_images)):
                 input_image = (np.transpose(input_images[i],(1,2,0))+1)/2
-                target_image = (np.transpose(target_images[i],(1,2,0))+1)/2
+                target_image = (np.transpose(target_images[3][i],(1,2,0))+1)/2
                 fake_image = np.transpose(np.array(fake_images.detach().cpu())[i],(1,2,0))
                 fake_image = (fake_image+1)/2
+                print(target_image.shape, input_image.shape, fake_image.shape)
                 output_image = np.concatenate([input_image,target_image,fake_image],axis=1)
                 file_name = "image_epoch-"+str(epoch)+"_sample-"+str(i)+".png"
                 file_path = os.path.join(self.output_dir,file_name)
                 plt.imsave(file_path,output_image)
             break
-        return
+        return 
         
     def fit(self, num_epochs):
         self.G.to(self.device)
