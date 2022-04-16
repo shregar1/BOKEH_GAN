@@ -1,8 +1,8 @@
 import os
 import torch
 import warnings
-from models.resnet_generator import Net
 from testing.tester import Tester
+from models.resnet_generator import Net
 
 warnings.filterwarnings("ignore",category=UserWarning)
 
