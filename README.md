@@ -1,1 +1,1 @@
-# CARTOON_GAN
+# Bokeh_GAN
