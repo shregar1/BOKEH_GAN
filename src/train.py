@@ -10,6 +10,7 @@ outputs_dir = "outputs/results/training"
 weights_dir = "weights"
 G_filename = "Generator_model_dped.pth"
 D_finename = "Discriminator_model_dped.pth"
+encoder_path = None
 lambda_L1 = 100
 lambda_Per = 1
 lambda_Col = 50
