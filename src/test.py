@@ -1,20 +1,22 @@
 import os
 import torch
-from src.models.resnet_generator import Net
-from src.testing.tester import Tester
+import warnings
+from models.resnet_generator import Net
+from testing.tester import Tester
 
+warnings.filterwarnings("ignore",category=UserWarning)
 
-test_dir = "test"
+test_dir = "dataset/test"
 outputs_dir = "outputs/results/testing"
 weights_dir = "weights"
-G_filename = "Generator_model_dped.pth"
-encoder_path = None
+G_filename = None
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-G_path = os.path.join(weights_dir,G_filename)
-G = Net(in_channels=3, out_channels=3, encoder_path=encoder_path)
+G = Net(in_channels=3, out_channels=3)
+if G_filename is not None:
+    G_path = os.path.join(weights_dir,G_filename)
+    G.load_state_dict(torch.load(G_path))
 G.to(device)
-G.load_state_dict(torch.load(G_path))
 
 test = Tester(G=G, test_dir=test_dir, outputs_dir=outputs_dir, device=device)
 test.fit()

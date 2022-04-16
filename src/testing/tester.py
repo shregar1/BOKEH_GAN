@@ -22,7 +22,7 @@ class Tester():
         input_image = input_image.astype(np.float32)
         x = torch.tensor(input_image).to(self.device)
         x = x.unsqueeze(dim=0)
-        fake_image = self.G(x)
+        fake_image = self.G(x)[3]
         self.G.zero_grad()
         input_image = (np.transpose(input_image,(1,2,0))+1)/2
         fake_image = np.transpose(np.array(fake_image.detach().cpu())[0],(1,2,0))

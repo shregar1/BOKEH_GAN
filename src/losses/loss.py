@@ -1,7 +1,7 @@
 import torch
+import kornia
 import torch.nn as nn
 import torchvision.models as models
-import kornia
 
 vgg_model = models.vgg16(pretrained=True)
 
@@ -110,8 +110,8 @@ class SSIMLoss():
     def __init__(self) -> None:
         pass
         
-    def find(self, y_true, y_pred):
-        ssim_loss = kornia.losses.ssim_loss(y_true,y_pred)
+    def find(self, y_true, y_pred, window_size):
+        ssim_loss = kornia.losses.ssim_loss(y_true,y_pred, window_size)
         return ssim_loss
 
 class TotalVariationalLoss():
@@ -120,6 +120,7 @@ class TotalVariationalLoss():
     
     def find(self, y_pred):
         tv_loss = kornia.losses.total_variation(y_pred)
+        tv_loss = torch.sum(tv_loss)
         return tv_loss
 
     

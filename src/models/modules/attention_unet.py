@@ -26,10 +26,10 @@ class out_block(nn.Module):
         return out
 
 class skip_block(nn.Module):
-    def __init__(self, in_channels) -> None:
+    def __init__(self, in_channels, feature_map_channel) -> None:
         super(skip_block,self).__init__()
         self.upsample = nn.Upsample(scale_factor=2, mode='bilinear')
-        self.conv = nn.Conv2d(in_channels=in_channels+1, out_channels=in_channels, kernel_size=1, stride=1)
+        self.conv = nn.Conv2d(in_channels=in_channels+feature_map_channel, out_channels=in_channels, kernel_size=1, stride=1)
     
     def forward(self,skip, y_):
         y_=self.upsample(y_)

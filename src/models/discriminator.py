@@ -4,7 +4,7 @@ import torch.nn as nn
 class Discriminator(nn.Module):
     def __init__(self):
         super(Discriminator,self).__init__()
-        self.conv1 = nn.Conv2d(in_channels=6,
+        self.conv1 = nn.Conv2d(in_channels=3,
                                out_channels=64,
                                kernel_size=4,
                                stride=2,
@@ -47,8 +47,7 @@ class Discriminator(nn.Module):
         
         self.lrelu = nn.LeakyReLU(0.2)
         
-    def forward(self,x,y):
-        x=torch.cat([x,y],dim=1)
+    def forward(self,x):
         x=self.conv1(x)
         x=self.lrelu(x)
         x=self.conv2(x)
