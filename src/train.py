@@ -1,9 +1,9 @@
 import os
 import torch
 import warnings
+from training.trainer import Trainer
 from models.resnet_generator import Net
 from models.discriminator import Discriminator
-from training.trainer import Trainer
 
 warnings.filterwarnings("ignore",category=UserWarning)
 
