@@ -5,9 +5,11 @@ from src.models.modules.resnet import res_block
 from src.models.modules.attention_unet import unet_block, out_block, skip_block
 
 class Net(nn.Module):
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, in_channels, out_channels, encoder_path):
         super(Net, self).__init__()
         self.encoder = encoder(res_block,[3,4,6,3],in_channels)
+        if encoder_path is not None:
+            self.encoder.load_state_dict(torch.load(encoder_path))
         self.bottle_conv1=nn.Conv2d(512,1024,kernel_size=3,stride=1,padding=1)
         self.bottle_conv2=nn.Conv2d(1024,512,kernel_size=3,stride=1,padding=1)
         self.relu=nn.ReLU()
