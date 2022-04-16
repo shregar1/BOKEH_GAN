@@ -106,13 +106,19 @@ class ColorLoss():
         color_loss = self.lambda_YUV*self.YUV_loss(y_true,y_pred) + self.lambda_HSV*self.HSV_loss(y_true,y_pred)
         return color_loss
 
-class StructuralLoss():
-    
-    def SSIM_loss(self, y_true, y_pred):
+class SSIMLoss():
+    def __init__(self) -> None:
+        pass
+        
+    def find(self, y_true, y_pred):
         ssim_loss = kornia.losses.ssim_loss(y_true,y_pred)
         return ssim_loss
+
+class TotalVariationalLoss():
+    def __init__(self) -> None:
+        pass
     
-    def TV_Loss(self, y_pred):
+    def find(self, y_pred):
         tv_loss = kornia.losses.total_variation(y_pred)
         return tv_loss
 

@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from fastai.layers import PixelShuffle_ICNR, in_channels
+from fastai.layers import PixelShuffle_ICNR
 
 class attention(nn.Module):
     def __init__(self,in_channels):

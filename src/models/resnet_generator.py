@@ -1,4 +1,3 @@
-from fastai.layers import in_channels
 import torch
 import torch.nn as nn
 from src.models.modules.resnet import encoder
