@@ -1,12 +1,12 @@
 import os
 import tqdm
 import torch
+import numpy as np
 import torch.nn as nn
 import torch.optim as optim
-import numpy as np
 import matplotlib.pyplot as plt
-from torch.utils.data import DataLoader
 from data.dataset import ImageDataset
+from torch.utils.data import DataLoader
 from losses.loss import PerceptualLoss, ColorLoss, SSIMLoss, TotalVariationalLoss
 
 class Trainer():
